@@ -1,1 +1,65 @@
-# areyouscyph
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>areyouscyphozia</title>
+    <style>
+        body {
+            background-color: black;
+            overflow: hidden; /* Prevent scrollbars */
+        }
+
+        .smile {
+            position: absolute;
+            font-size: 20px; /* Initial size */
+            animation: glide 5s linear infinite; /* Adjust duration for speed */
+            user-select: none; /* Prevent text selection */
+            pointer-events: none; /* Prevent interaction with smiles */
+            color: yellow; /* Smile color */
+        }
+
+        @keyframes glide {
+            0% { transform: translate(0, 0); opacity: 0;}
+            100% { transform: translate(var(--x), var(--y)); opacity: 1;}
+        }
+    </style>
+</head>
+<body>
+
+<script>
+    const numSmiles = 50; // Number of smiles
+    const body = document.body;
+
+    for (let i = 0; i < numSmiles; i++) {
+        const smile = document.createElement('div');
+        smile.classList.add('smile');
+        smile.textContent = ':)';
+
+        // Random size
+        const randomSize = Math.floor(Math.random() * 30) + 15; // 15 to 45px
+        smile.style.fontSize = randomSize + 'px';
+
+        // Random initial position (important for varied animation start)
+        const xStart = Math.random() * window.innerWidth;
+        const yStart = Math.random() * window.innerHeight;
+        smile.style.left = xStart + 'px';
+        smile.style.top = yStart + 'px';
+
+        // Random target position for animation
+        const xEnd = Math.random() * window.innerWidth;
+        const yEnd = Math.random() * window.innerHeight;
+
+        smile.style.setProperty('--x', (xEnd - xStart) + 'px');
+        smile.style.setProperty('--y', (yEnd - yStart) + 'px');
+
+
+        // Random animation delay to stagger them
+        smile.style.animationDelay = Math.random() * 5 + 's'; // Up to 5 seconds delay
+
+        body.appendChild(smile);
+    }
+</script>
+
+</body>
+</html>
